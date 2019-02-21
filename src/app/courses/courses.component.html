@@ -1,0 +1,27 @@
+<button (click)="onAdd(courseName)">Add</button>
+
+<input #courseName type="text">
+<div *ngIf="courses.length>0; then coursesList else noCourses"></div>
+<ng-template #coursesList>
+<ul>
+  <li *ngFor="let course of courses;trackBy:trackByCourse">
+    {{course.courseName}}
+    <button (click)="onRemove(course)">Remove</button>
+  </li>
+</ul>
+</ng-template>
+<ng-template #noCourses>
+  <h2>No Courses</h2>
+</ng-template>
+
+<ul class="nav">
+<li [class.active]="defaultView === 'courses'">
+<a (click)="setView('courses')" >Courses</a>
+</li>
+<li [class.active]="defaultView ==='certifcate'"><a (click)="setView('certifcate')" >Certficate</a></li>
+</ul>
+
+<div [ngSwitch]="defaultView">
+<div *ngSwitchCase="'courses'">courses</div>
+<div *ngSwitchCase="'certifcate'">certficate</div>
+</div>
